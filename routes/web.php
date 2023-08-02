@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/login', function () {
     return view('login');
 });
@@ -30,6 +26,28 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/', function() {
+    return view('index');
+});
+
+
+Route::get('/listings', function() {
+    return view('listings', [
+        'heading' => 'Latest listings',
+        'listings' => [
+            [
+                'id' => 1,
+                'title' => 'List No 1',
+                'description' => 'resto the restaurant page that was the best in the world to server the food whatever the customer want and it delievr that food within 1 mins '
+            ],
+            [
+                'id' => 2,
+                'title' => 'List No 2',
+                'description' => 'resto the restaurant page that was the best in the world to server the food whatever the customer want and it delievr that food within 1 mins '
+            ]
+        ]
+    ]);
+});
 
 Route::get('/hello', function () {
     return response('<h1>Hello world</h1>', 200)
@@ -43,4 +61,6 @@ Route::get('/posts/{id}', function($id){
     return response('Post ' . $id);
 })->where('id', '[0-9]+');
 
-
+Route::get('search', function(Request $request) {
+    return $request->name . ' ' . $request->city;
+});
