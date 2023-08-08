@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,53 +17,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('login');
-});
+// all listings
+Route::get('/', [ListingController::class, 'index']);
 
-Route::get('/register', function () {
-    return view('register');
-});
+// show create form
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+// store listing
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
-Route::get('/', function() {
-    return view('index');
-});
+// show edit form
+Route::get('/listings/{listing}/edit',
+[ListingController::class, 'edit'])->middleware('auth');
+
+//update and edit
+Route::put('/listings/{listing}', [ListingController::class,'update'])->middleware('auth');
 
 
-Route::get('/listings', function() {
-    return view('listings', [
-        'heading' => 'Latest listings',
-        'listings' => [
-            [
-                'id' => 1,
-                'title' => 'List No 1',
-                'description' => 'resto the restaurant page that was the best in the world to server the food whatever the customer want and it delievr that food within 1 mins '
-            ],
-            [
-                'id' => 2,
-                'title' => 'List No 2',
-                'description' => 'resto the restaurant page that was the best in the world to server the food whatever the customer want and it delievr that food within 1 mins '
-            ]
-        ]
-    ]);
-});
+//delete
+Route::delete('/listings/{listing}', [ListingController::class,'destroy'])->middleware('auth');
 
-Route::get('/hello', function () {
-    return response('<h1>Hello world</h1>', 200)
-    ->header('Content-TYype', 'text/plain')
-    ->header('foo', 'bar');
+// Manage Listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
-});
 
-Route::get('/posts/{id}', function($id){
-    ddd($id);
-    return response('Post ' . $id);
-})->where('id', '[0-9]+');
+// single listing
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
-Route::get('search', function(Request $request) {
-    return $request->name . ' ' . $request->city;
-});
+//show register create form
+Route::get('/register', [UserController::class, 'register'])->middleware('guest');
+
+//create new users
+
+Route::post('/users', [UserController::class, 'store']);
+
+//logut
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+//login
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+
+//login user
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
