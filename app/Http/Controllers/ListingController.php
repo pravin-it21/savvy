@@ -39,7 +39,8 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'is_private' => 'boolean',
         ]);
 
         if($request->hasFile('image')) {
@@ -48,8 +49,9 @@ class ListingController extends Controller
 
         $formFields['user_id'] = auth()->id();
 
-        Product::create($formFields);
-
+        $product = new Product($formFields);
+        $product->is_private = $request->input('is_private', false);
+        $product->save();
 
         return redirect('/')->with('message', 'Product Created successfully!');
     }
@@ -78,17 +80,20 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'is_private' => 'boolean',
         ]);
 
         if($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('productimages', 'public');
         }
 
-        $listing->update($formFields);
+         // Update the is_private column based on user's choice
+         $formFields['is_private'] = $request->has('is_private');
+         $listing->update($formFields);
 
 
-        return back()->with('message', 'Product updated successfully!');
+        return redirect('/')->with('message', 'Product updated successfully!');
     }
 
 
@@ -106,6 +111,12 @@ class ListingController extends Controller
     public function manage() {
         return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
     }
+
+
+
+
+
+
 
 
 }

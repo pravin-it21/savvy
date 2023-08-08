@@ -60,3 +60,9 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 //login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
+
+
+
+
+
+

@@ -23,6 +23,8 @@
                         {{$listing->title}}
                     </a>
                 </td>
+
+                
                 <td
                     class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                 >
@@ -45,7 +47,7 @@
                     <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
                 </form>
                 </td>
-                
+
             </tr>
             @endforeach
             @else
