@@ -32,9 +32,39 @@
             <a href="/"
                 ><img class="w-24" src="{{asset('images/logoo.png')}}" alt="" class="logo"
             /></a>
-            <ul class="flex space-x-6 mr-6 text-lg">
-                @auth
 
+
+            <ul class="flex space-x-6 mr-6 text-lg">
+
+
+
+
+                @if(auth()->check() && auth()->user()->is_admin)
+                    <li>
+                        <span class="font-bold uppercase">
+                            Welcome, Admin! {{auth()->user()->name}}
+                        </span>
+
+                    </li>
+
+                    <li>
+                        <a href="/listings/manage" class="hover:text-laravel"
+                            ><i class="fa-solid fa-gear"></i>
+                            Manage Products</a
+                        >
+                    </li>
+                    <li>
+                        <form class="inline" method="POST" action="/logout">
+                        @csrf
+                        <button type="submit">
+                            <i class="fa-solid fa-door-closed">
+
+                            </i> Logout
+                        </button>
+                       </form>
+                    </li>
+
+                @elseif(auth()->check())
                 <li>
                     <span class="font-bold uppercase">
                         Welcome {{auth()->user()->name}}
@@ -42,9 +72,9 @@
 
                 </li>
                 <li>
-                    <a href="/listings/manage" class="hover:text-laravel"
+                    <a href="/listings/cart" class="hover:text-laravel"
                         ><i class="fa-solid fa-gear"></i>
-                        Manage Products</a
+                        Cart</a
                     >
                 </li>
 
@@ -58,7 +88,9 @@
                     </button>
                    </form>
                 </li>
-                @else
+                @endif
+
+                @guest
 
 
                 <li>
@@ -72,7 +104,7 @@
                         Login</a
                     >
                 </li>
-                @endauth
+                @endguest
             </ul>
         </nav>
 
@@ -83,12 +115,14 @@
         class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-laravel text-white h-24 mt-24 opacity-90 md:justify-center"
     >
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
-
+        `
+        @if(auth()->check() && auth()->user()->is_admin)
         <a
             href="/listings/create"
             class="absolute top-1/3 right-10 bg-black text-white py-2 px-5"
             >Add Product</a
         >
+        @endif
     </footer>
 
 

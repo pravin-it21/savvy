@@ -15,6 +15,7 @@ class UserController extends Controller
 
     }
 
+   
     //create new users
 
     public function store(Request $request) {

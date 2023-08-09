@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,11 +21,24 @@ use App\Http\Controllers\ListingController;
 // all listings
 Route::get('/', [ListingController::class, 'index']);
 
+
 // show create form
-Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('admin');
 
 // store listing
-Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
+Route::post('/listings', [ListingController::class, 'store'])->middleware('admin');
+
+
+//cart
+
+
+Route::get('/listings/cart', [ListingController::class, 'cart'])->middleware('auth');
+
+// addtocart listing
+Route::post('/listingsss', [ListingController::class, 'addToCart']);
+
+
+
 
 // show edit form
 Route::get('/listings/{listing}/edit',
@@ -38,7 +52,9 @@ Route::put('/listings/{listing}', [ListingController::class,'update'])->middlewa
 Route::delete('/listings/{listing}', [ListingController::class,'destroy'])->middleware('auth');
 
 // Manage Listings
-Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth', 'admin');
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('admin');
+
+
 
 
 // single listing
@@ -51,6 +67,12 @@ Route::get('/register', [UserController::class, 'register'])->middleware('guest'
 
 Route::post('/users', [UserController::class, 'store']);
 
+
+
+
+
+
+
 //logut
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
@@ -59,6 +81,7 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 //login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
 
 
 

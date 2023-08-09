@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 
 
 class ListingController extends Controller
@@ -29,6 +31,8 @@ class ListingController extends Controller
         return view('listings.create');
     }
 
+
+
     //store Listing Data
     public function store(Request $request) {
         $formFields = $request->validate([
@@ -41,7 +45,7 @@ class ListingController extends Controller
             'tags' => 'required',
             'description' => 'required',
             'is_private' => 'boolean',
-           
+
         ]);
 
         if($request->hasFile('image')) {
@@ -108,6 +112,17 @@ class ListingController extends Controller
         return redirect('/')->with('message', 'Product Deleted successfully');
     }
 
+    // show cart
+    public function cart() {
+        return view('listings.cart', ['listings' => auth()->user()->listings()->get()]);
+    }
+
+    //addtocart
+    public function addToCart(Request $request) {
+
+
+        return redirect('/')->with('message', 'Product Added successfully!');
+    }
 
     //manage
     public function manage() {
