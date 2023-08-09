@@ -21,7 +21,9 @@ class UserController extends Controller
         $formfields = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'is_admin' => 'boolean',
+
         ]);
 
 
@@ -31,8 +33,15 @@ class UserController extends Controller
         //create user
         $user = User::create($formfields);
 
+
+
+        $user->is_admin = $request->input('is_admin', false);
+        $user->save();
+
         //login
         auth()->login($user);
+
+
 
         return redirect('/')->with('message', 'User Created and logged in');
 

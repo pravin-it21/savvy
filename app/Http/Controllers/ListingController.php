@@ -41,6 +41,7 @@ class ListingController extends Controller
             'tags' => 'required',
             'description' => 'required',
             'is_private' => 'boolean',
+           
         ]);
 
         if($request->hasFile('image')) {
@@ -52,6 +53,7 @@ class ListingController extends Controller
         $product = new Product($formFields);
         $product->is_private = $request->input('is_private', false);
         $product->save();
+
 
         return redirect('/')->with('message', 'Product Created successfully!');
     }
