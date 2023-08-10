@@ -15,10 +15,12 @@
             <div class="text-xl font-bold mb-4">{{$listing->company}}</div>
             <x-listing-tags :tagsCsv="$listing->tags" />
 
-                @if(!(auth()->check() && auth()->user()->is_admin))
 
-                <form method="POST" action="/listingsss">
+                @if(auth()->check() && !auth()->user()->is_admin)
+
+                <form method="POST" action="/addtocart">
                     @csrf
+
                 <div class="album-price">
 
                       <div class="mb-6">

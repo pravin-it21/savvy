@@ -21,24 +21,17 @@ use App\Http\Controllers\ListingController;
 // all listings
 Route::get('/', [ListingController::class, 'index']);
 
-
 // show create form
 Route::get('/listings/create', [ListingController::class, 'create'])->middleware('admin');
 
 // store listing
 Route::post('/listings', [ListingController::class, 'store'])->middleware('admin');
 
-
 //cart
-
-
 Route::get('/listings/cart', [ListingController::class, 'cart'])->middleware('auth');
 
 // addtocart listing
-Route::post('/listingsss', [ListingController::class, 'addToCart']);
-
-
-
+Route::post('/addtocart', [ListingController::class, 'addToCart'])->middleware('auth');
 
 // show edit form
 Route::get('/listings/{listing}/edit',
@@ -47,15 +40,11 @@ Route::get('/listings/{listing}/edit',
 //update and edit
 Route::put('/listings/{listing}', [ListingController::class,'update'])->middleware('auth');
 
-
 //delete
 Route::delete('/listings/{listing}', [ListingController::class,'destroy'])->middleware('auth');
 
 // Manage Listings
 Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('admin');
-
-
-
 
 // single listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
@@ -64,13 +53,7 @@ Route::get('/listings/{listing}', [ListingController::class, 'show']);
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 
 //create new users
-
 Route::post('/users', [UserController::class, 'store']);
-
-
-
-
-
 
 
 //logut

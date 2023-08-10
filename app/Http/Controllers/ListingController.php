@@ -101,8 +101,6 @@ class ListingController extends Controller
 
         return redirect('/')->with('message', 'Product updated successfully!');
     }
-
-
     // dlete list
     public function destroy(Product $listing) {
         if($listing->user_id != auth()->id()) {
@@ -111,7 +109,6 @@ class ListingController extends Controller
         $listing->delete();
         return redirect('/')->with('message', 'Product Deleted successfully');
     }
-
     // show cart
     public function cart() {
         return view('listings.cart', ['listings' => auth()->user()->listings()->get()]);
@@ -120,18 +117,12 @@ class ListingController extends Controller
     //addtocart
     public function addToCart(Request $request) {
 
-
         return redirect('/')->with('message', 'Product Added successfully!');
     }
-
     //manage
     public function manage() {
         return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
     }
-
-
-
-
 
 
 
