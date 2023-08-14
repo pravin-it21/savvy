@@ -66,4 +66,19 @@ Upload the files to your document root, Valet folder or run
 php artisan serve
 ```
 
-  
+# Screenshots 
+
+![Screenshot (181)](https://github.com/pravin-it21/savvy/assets/95603758/a611e628-cbd0-4ce0-80c8-d728150362f7)
+
+
+![Screenshot (182)](https://github.com/pravin-it21/savvy/assets/95603758/8497bd7e-0bb3-4e8b-bc83-addb07c3e83c)
+
+![Screenshot (183)](https://github.com/pravin-it21/savvy/assets/95603758/080d751a-bd37-4fea-9436-9b4c522d3f10)
+
+![Screenshot (184)](https://github.com/pravin-it21/savvy/assets/95603758/2c6c3c7f-4a4d-420b-8c93-3eb288e69fd6)
+
+![Screenshot (185)](https://github.com/pravin-it21/savvy/assets/95603758/5a7b135b-c90c-4672-8d19-add57c799f82)
+
+![Screenshot (186)](https://github.com/pravin-it21/savvy/assets/95603758/9f2440b6-c06f-4f68-b973-5e0657d2f7ed)
+
+![Screenshot (187)](https://github.com/pravin-it21/savvy/assets/95603758/386b2a06-9134-46bc-b4d3-219690a34953)
